@@ -1,3 +1,8 @@
+"""
+This part belong to Peng Yongxue
+Create features of SITE class using extract function
+"""
+
 
 class SITE:
     def __init__(self, site):

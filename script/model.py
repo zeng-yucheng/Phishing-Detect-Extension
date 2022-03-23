@@ -1,3 +1,8 @@
+"""
+This part belong to Xu Ye
+Predict result in dictionary format using feature x
+"""
+
 
 class MODEL:
     def __init__(self):
