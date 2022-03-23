@@ -1,0 +1,42 @@
+body{
+   width:400px;
+   height:200px;
+   display:inline-block;
+   }
+   
+button {
+  height: 30px;
+  width: 150px;
+  outline: green solid thin;
+  margin: 10px;
+  border: none;
+  border-radius: 2px;
+}
+
+#p1
+{
+	font-size:10px;
+	display:inline-block;
+}
+
+#button
+{
+	vertical-align: middle; 
+	text-align:center;
+}
+
+#div0
+{
+	vertical-align: middle; 
+	line-height: 50px;
+	text-align:center;
+	font-size:25px;
+}
+
+#div1
+{
+	vertical-align: middle; 
+	line-height: 15px;
+	text-align: center;
+	font-size:15px;
+}
