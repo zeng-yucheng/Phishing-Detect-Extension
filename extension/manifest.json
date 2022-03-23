@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "Malicious Web Content Detector",
-  "description": "This extension helps you avoid accessing malicious websites by giving you a chance to analyze the website before you interact with it.",
+  "name": "Phishing Detect Extension",
+  "description": "This extension uses machine learning technique to detect phishing and warn users.",
   "version": "1.0",
 
   "browser_action": {
@@ -14,7 +14,6 @@
     "activeTab",
     "tabs",
     "https://ajax.googleapis.com/",
-    "tabs",
     "<all_urls>"
   ]
 }
