@@ -8,7 +8,10 @@ function func(){
 		req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		req.send(content);
 		// alert(req.responseText);
-		$("#div1").text(req.responseText);
+		var rsp = req.responseText.replace(/'/g, '"');
+		var j = JSON.parse(rsp);
+		$("#tres").text(j.result);
+		$("#tprob").text(j.probability);
 		return req.responseText;
 	});
 }

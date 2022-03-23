@@ -1,6 +1,6 @@
 body{
    width:400px;
-   height:200px;
+   height:300px;
    display:inline-block;
    }
    
@@ -13,10 +13,19 @@ button {
   border-radius: 2px;
 }
 
-#p1
-{
-	font-size:10px;
-	display:inline-block;
+div {
+	vertical-align: middle; 
+	line-height: 15px;
+	text-align: left;
+	font-size:15px;
+}
+
+table {
+	table-layout: fixed;
+	width: 85%;
+	height: 15px;
+	text-align: left;
+	margin: auto;
 }
 
 #button
@@ -33,10 +42,18 @@ button {
 	font-size:25px;
 }
 
-#div1
+#result
 {
 	vertical-align: middle; 
 	line-height: 15px;
-	text-align: center;
+	text-align: left;
+	font-size:15px;
+}
+
+#probability
+{
+	vertical-align: middle; 
+	line-height: 15px;
+	text-align: left;
 	font-size:15px;
 }
