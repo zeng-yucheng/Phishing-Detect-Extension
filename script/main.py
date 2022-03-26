@@ -32,9 +32,8 @@ except:
 print("Transfer Successfully!")
 
 # Construct site class
-site = SITE({"url": url, "html": html})
-site.extract()
-features = site.features
+site = SITE(url, html)
+features = site.extract()
 
 # Process features
 model = MODEL()
