@@ -1,5 +1,5 @@
 """
-This part belong to Peng Yongxue
+This part is completed by Peng Yongxue
 Analyze website features which will be used to predict whether it's a phishing website
 """
 

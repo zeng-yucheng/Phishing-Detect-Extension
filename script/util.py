@@ -9,4 +9,3 @@ EXISTENCE_OF_HTTPS = "existence_of_https"
 
 # Regex Pattern
 SHORT_URL_PATTERN = r"https?://(bit\.ly|t\.co|lnkd\.in|tcrn\.ch|goo\.gl|shorturl\.at)\S*"
-IPV4_PATTERN = r"^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$"
