@@ -5,6 +5,7 @@ Analyze website features which will be used to predict whether it's a phishing w
 
 import util
 import re
+from urllib.parse import urlparse
 
 class SITE:
     def __init__(self, url, html):
@@ -24,6 +25,7 @@ class SITE:
         self.check_short_url()
         self.contain_at_symbol()
         self.check_for_redirect()
+        self.check_domain()
 
     # Todo
     def analyze_html_content(self):
@@ -59,3 +61,16 @@ class SITE:
             self.features[util.CONTAIN_REDIRECT] = 1
         else:
             self.features[util.CONTAIN_REDIRECT] = 0
+
+    def check_domain(self):
+        domain = urlparse(self.url).netloc
+        if "-" in domain:
+            self.features[util.SEPARATED_BY_DASH_SYMBOL] = 1
+        else:
+            self.features[util.SEPARATED_BY_DASH_SYMBOL] = 0
+
+        domain_upper = domain.upper()
+        if "HTTPS" in domain_upper:
+            self.features[util.EXISTENCE_OF_HTTPS] = 1
+        else:
+            self.features[util.EXISTENCE_OF_HTTPS] = 0
