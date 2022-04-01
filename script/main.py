@@ -31,10 +31,12 @@ except:
 
 print("Transfer Successfully!")
 
+# For testing only
+url = 'https://www.iis.net/?utm_medium=iis-@deployment//'
+
 # Construct site class
-site = SITE({"url": url, "html": html})
-site.extract()
-features = site.features
+site = SITE(url, html)
+features = site.analyze()
 
 # Process features
 model = MODEL()
