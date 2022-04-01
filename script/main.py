@@ -18,7 +18,7 @@ if len(url) > 4:
 response = urllib.request.urlopen(url)
 string = response.read()
 codec = 'utf-8'
-dir = 'D:/NUS/S2/CS5331/Proj/proj/Phishing-Detect-Extension/data/html.txt'
+dir = 'D:/NUS/S2/CS5331/Proj/proj/Phishing-Detect-Extension/data/dataset.txt'
 
 try:
     print("Using UTF-8 to decode...")
@@ -33,13 +33,18 @@ print("Transfer Successfully!")
 
 # For testing only
 url = 'https://www.iis.net/?utm_medium=iis-@deployment//'
+fb = sys.argv[2]
+if fb == '0':
+    # Construct site class
+    site = SITE(url, html)
+    features = site.analyze()
 
-# Construct site class
-site = SITE(url, html)
-features = site.analyze()
+    # Process features
+    model = MODEL()
+    res = model.predict({"long_url": 1})
 
-# Process features
-model = MODEL()
-res = model.predict(features)
-
-print(res)
+    print(res)
+else:
+    with open(dir, "w") as f:
+        f.write(url+' '+fb)
+    print(url, fb)
