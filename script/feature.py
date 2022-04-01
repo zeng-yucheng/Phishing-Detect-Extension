@@ -7,6 +7,7 @@ import util
 import re
 from urllib.parse import urlparse
 
+
 class SITE:
     def __init__(self, url, html):
         self.url = url
