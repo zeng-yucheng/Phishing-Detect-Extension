@@ -1,5 +1,5 @@
 """
-This part is completed by Peng Yongxue
+This part is completed by Yongxue Peng
 Analyze website features which will be used to predict whether it's a phishing website
 
 1: Phishing
@@ -126,7 +126,13 @@ class SITE:
 
     def check_form_handler(self, soup):
         for form in soup.find_all('form', action=True):
-            if len(form['action']) == 0 or form['action'] == "about:blank":
+            handler = form['action']
+            if len(handler) == 0 or handler == "about:blank":
                 self.features[util.BLANK_FORM_HANDLER] = 1
             else:
                 self.features[util.BLANK_FORM_HANDLER] = 0
+
+            if "mailto:" in handler or "mail()" in handler:
+                self.features[util.SUBMIT_USER_INFO_TO_MAIL] = 1
+            else:
+                self.features[util.SUBMIT_USER_INFO_TO_MAIL] = 0
