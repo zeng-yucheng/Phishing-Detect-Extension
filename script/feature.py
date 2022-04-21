@@ -2,8 +2,8 @@
 This part is completed by Yongxue Peng
 Analyze website features which will be used to predict whether it's a phishing website
 
-1: Phishing
-0: Legitimate
+1: Legitimate
+-1: Phishing
 """
 
 import util
@@ -54,56 +54,56 @@ class SITE:
     # analyze url
     def check_internet_protocol(self):
         if self.url[0:5].upper() == "HTTPS":
-            self.features[util.HTTPS_PROTOCOL] = 0
-        else:
             self.features[util.HTTPS_PROTOCOL] = 1
+        else:
+            self.features[util.HTTPS_PROTOCOL] = -1
 
     def check_url_length(self):
         if len(self.url) >= 54:
-            self.features[util.LONG_URL] = 1
+            self.features[util.LONG_URL] = -1
         else:
-            self.features[util.LONG_URL] = 0
+            self.features[util.LONG_URL] = 1
 
     def check_short_url(self):
         if re.search(util.SHORT_URL_PATTERN, self.url):
-            self.features[util.SHORT_URL] = 1
+            self.features[util.SHORT_URL] = -1
         else:
-            self.features[util.SHORT_URL] = 0
+            self.features[util.SHORT_URL] = 1
 
     def contain_at_symbol(self):
         if "@" in self.url:
-            self.features[util.CONTAIN_AT_SYMBOL] = 1
+            self.features[util.CONTAIN_AT_SYMBOL] = -1
         else:
-            self.features[util.CONTAIN_AT_SYMBOL] = 0
+            self.features[util.CONTAIN_AT_SYMBOL] = 1
 
     def check_for_redirect(self):
         position = self.url.rfind("//")
         if position > 6:
-            self.features[util.CONTAIN_REDIRECT] = 1
+            self.features[util.CONTAIN_REDIRECT] = -1
         else:
-            self.features[util.CONTAIN_REDIRECT] = 0
+            self.features[util.CONTAIN_REDIRECT] = 1
 
     # analyze domain
     def check_domain(self, domain):
         if "-" in domain:
-            self.features[util.SEPARATED_BY_DASH_SYMBOL] = 1
+            self.features[util.SEPARATED_BY_DASH_SYMBOL] = -1
         else:
-            self.features[util.SEPARATED_BY_DASH_SYMBOL] = 0
+            self.features[util.SEPARATED_BY_DASH_SYMBOL] = 1
 
         domain_upper = domain.upper()
         if "HTTPS" in domain_upper:
             self.features[util.EXISTENCE_OF_HTTPS] = 1
         else:
-            self.features[util.EXISTENCE_OF_HTTPS] = 0
+            self.features[util.EXISTENCE_OF_HTTPS] = -1
 
     def check_hostname(self, domainInfo):
         hostname = domainInfo.name
 
         if re.search(hostname, self.url):
-            self.features[util.URL_CONTAINS_HOSTNAME] = 0
-        else:
             self.features[util.URL_CONTAINS_HOSTNAME] = 1
-            
+        else:
+            self.features[util.URL_CONTAINS_HOSTNAME] = -1
+
     def check_domain_expiry_date(self, domainInfo):
         expiryDate = domainInfo.expiration_date
 
@@ -113,9 +113,9 @@ class SITE:
             numOfDays = abs((expiryDate - today).days)
 
         if numOfDays <= 365:
-            self.features[util.DOMAIN_EXPIRY_DATE] = 1
+            self.features[util.DOMAIN_EXPIRY_DATE] = -1
         else:
-            self.features[util.DOMAIN_EXPIRY_DATE] = 0
+            self.features[util.DOMAIN_EXPIRY_DATE] = 1
 
     def check_domain_age(self, domainInfo):
         createdAt = domainInfo.creation_date
@@ -126,9 +126,9 @@ class SITE:
             domainAge = domainAgeInDays/30
 
             if domainAge < 6:
-                self.features[util.DOMAIN_AGE] = 1
+                self.features[util.DOMAIN_AGE] = -1
             else:
-                self.features[util.DOMAIN_AGE] = 0
+                self.features[util.DOMAIN_AGE] = 1
 
     # analyze html content
     def check_percentage_of_anchor_url(self, soup):
@@ -146,19 +146,19 @@ class SITE:
             percentage = unsafeAnchorCounts * 100 / float(totalCounts)
         
         if percentage < 31.0:
-            self.features[util.PERCENTAGE_OF_URL_ANCHOR] = 0
-        else:
             self.features[util.PERCENTAGE_OF_URL_ANCHOR] = 1
+        else:
+            self.features[util.PERCENTAGE_OF_URL_ANCHOR] = -1
 
     def check_form_handler(self, soup):
         for form in soup.find_all('form', action=True):
             handler = form['action']
             if len(handler) == 0 or handler == "about:blank":
-                self.features[util.BLANK_FORM_HANDLER] = 1
+                self.features[util.BLANK_FORM_HANDLER] = -1
             else:
-                self.features[util.BLANK_FORM_HANDLER] = 0
+                self.features[util.BLANK_FORM_HANDLER] = 1
 
             if "mailto:" in handler or "mail()" in handler:
-                self.features[util.SUBMIT_USER_INFO_TO_MAIL] = 1
+                self.features[util.SUBMIT_USER_INFO_TO_MAIL] = -1
             else:
-                self.features[util.SUBMIT_USER_INFO_TO_MAIL] = 0
+                self.features[util.SUBMIT_USER_INFO_TO_MAIL] = 1
