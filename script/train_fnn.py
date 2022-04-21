@@ -8,6 +8,9 @@ from keras.models import load_model
 
 data = arff.loadarff('../datasets/Training Dataset.arff')
 df = pd.DataFrame(data[0]).astype('int')
+df = df[['URL_Length', 'Shortining_Service', 'having_At_Symbol', 'double_slash_redirecting', 'Prefix_Suffix',
+         'Domain_registeration_length', 'Abnormal_URL', 'age_of_domain', 'URL_of_Anchor', 'SFH',
+         'Submitting_to_email', 'Result']]
 X = df.values[:, :-1]
 df['one_hot_1'] = df['Result'].apply(lambda x: 1 if x == -1 else 0)
 df['one_hot_2'] = df['one_hot_1'].apply((lambda x: 1 - 1))
@@ -38,8 +41,8 @@ plt.show()
 plt.clf()
 acc_values = history_dict['accuracy']
 val_acc_values = history_dict['val_accuracy']
-plt.plot(epochs,acc_values,'bo',label='Training acc')
-plt.plot(epochs,val_acc_values,'b',label='Validation acc')
+plt.plot(epochs, acc_values, 'bo', label='Training acc')
+plt.plot(epochs, val_acc_values, 'b', label='Validation acc')
 plt.title('Training and validation accuracy')
 plt.xlabel('Epochs')
 plt.ylabel('Acc')
@@ -50,4 +53,4 @@ plt.show()
 
 model.save('../models/fnn.m5')
 test_model = load_model('../models/fnn.m5')
-print(test_model.evaluate(X_test, y_test))
+print(test_model.predict(X_test))

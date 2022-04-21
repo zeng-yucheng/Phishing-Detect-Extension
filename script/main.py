@@ -1,7 +1,7 @@
 import urllib.request
 import sys
 from feature import SITE
-from model import MODEL
+from model import fnn, xgb
 
 # Fetch url
 try:
@@ -32,17 +32,17 @@ except:
 print("Transfer Successfully!")
 
 # For testing only
-url = 'https://www.iis.net/?utm_medium=iis-@deployment//'
+url = 'https://www.google.com'
 fb = sys.argv[2]
+
 if fb == '0':
     # Construct site class
     site = SITE(url, html)
-    features = site.analyze()
-
+    # features = site.analyze()
+    features = [1 for i in range(11)]
+    print(features)
     # Process features
-    model = MODEL()
-    res = model.predict({"long_url": 1})
-
+    res = xgb(features)
     print(res)
 else:
     with open(dir, "w") as f:
