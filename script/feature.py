@@ -90,12 +90,6 @@ class SITE:
         else:
             self.features[util.SEPARATED_BY_DASH_SYMBOL] = 1
 
-        domain_upper = domain.upper()
-        if "HTTPS" in domain_upper:
-            self.features[util.EXISTENCE_OF_HTTPS] = 1
-        else:
-            self.features[util.EXISTENCE_OF_HTTPS] = -1
-
     def check_hostname(self, domainInfo):
         hostname = domainInfo.name
 
