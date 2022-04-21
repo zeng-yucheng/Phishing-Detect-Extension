@@ -11,8 +11,8 @@ import re
 import requests
 import whois
 
-from datetime import datetime
 from urllib.parse import urlparse
+from datetime import datetime
 from bs4 import BeautifulSoup
 
 class SITE:
@@ -23,6 +23,7 @@ class SITE:
 
     def analyze(self):
         self.analyze_url()
+        self.analyze_domain()
         self.analyze_html_content()
 
         return self.features
@@ -33,8 +34,15 @@ class SITE:
         self.check_short_url()
         self.contain_at_symbol()
         self.check_for_redirect()
-        self.check_domain()
-        self.check_domain_expiry_date()
+
+    def analyze_domain(self):
+        domain = urlparse(self.url).netloc
+        domainInfo = whois.query(domain)
+
+        self.check_domain(domain)
+        self.check_domain_expiry_date(domainInfo)
+        self.check_hostname(domainInfo)
+        self.check_domain_age(domainInfo)
 
     def analyze_html_content(self):
         page = requests.get(self.url)
@@ -42,7 +50,6 @@ class SITE:
 
         self.check_percentage_of_anchor_url(soup)
         self.check_form_handler(soup)
-        return True
 
     # analyze url
     def check_internet_protocol(self):
@@ -76,8 +83,8 @@ class SITE:
         else:
             self.features[util.CONTAIN_REDIRECT] = 0
 
-    def check_domain(self):
-        domain = urlparse(self.url).netloc
+    # analyze domain
+    def check_domain(self, domain):
         if "-" in domain:
             self.features[util.SEPARATED_BY_DASH_SYMBOL] = 1
         else:
@@ -89,9 +96,15 @@ class SITE:
         else:
             self.features[util.EXISTENCE_OF_HTTPS] = 0
 
-    def check_domain_expiry_date(self):
-        domain = urlparse(self.url).netloc
-        domainInfo = whois.query(domain)
+    def check_hostname(self, domainInfo):
+        hostname = domainInfo.name
+
+        if re.search(hostname, self.url):
+            self.features[util.URL_CONTAINS_HOSTNAME] = 0
+        else:
+            self.features[util.URL_CONTAINS_HOSTNAME] = 1
+            
+    def check_domain_expiry_date(self, domainInfo):
         expiryDate = domainInfo.expiration_date
 
         today = datetime.today()
@@ -103,6 +116,19 @@ class SITE:
             self.features[util.DOMAIN_EXPIRY_DATE] = 1
         else:
             self.features[util.DOMAIN_EXPIRY_DATE] = 0
+
+    def check_domain_age(self, domainInfo):
+        createdAt = domainInfo.creation_date
+        expiredAt = domainInfo.expiration_date
+
+        if createdAt and expiredAt:
+            domainAgeInDays = (expiredAt - createdAt).days
+            domainAge = domainAgeInDays/30
+
+            if domainAge < 6:
+                self.features[util.DOMAIN_AGE] = 1
+            else:
+                self.features[util.DOMAIN_AGE] = 0
 
     # analyze html content
     def check_percentage_of_anchor_url(self, soup):

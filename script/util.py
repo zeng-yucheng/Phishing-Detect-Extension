@@ -4,9 +4,12 @@ LONG_URL = "long_url"
 SHORT_URL = "short_url"
 CONTAIN_AT_SYMBOL = "contain_at_symbol"
 CONTAIN_REDIRECT = "contain_redirect"
+
 SEPARATED_BY_DASH_SYMBOL = "separated_by_dash_symbol"
 EXISTENCE_OF_HTTPS = "existence_of_https"
+URL_CONTAINS_HOSTNAME = "url_contains_hostname"
 DOMAIN_EXPIRY_DATE = "domain_expiry_date"
+DOMAIN_AGE = "domain_age"
 
 PERCENTAGE_OF_URL_ANCHOR = "percentage_of_anchor_url"
 BLANK_FORM_HANDLER = "blank_form_handler"
