@@ -1,5 +1,4 @@
 # Website Features
-HTTPS_PROTOCOL = "https_protocol"
 LONG_URL = "long_url"
 SHORT_URL = "short_url"
 CONTAIN_AT_SYMBOL = "contain_at_symbol"

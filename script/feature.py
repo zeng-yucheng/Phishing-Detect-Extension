@@ -29,7 +29,6 @@ class SITE:
         return self.features
     
     def analyze_url(self):
-        self.check_internet_protocol()
         self.check_url_length()
         self.check_short_url()
         self.contain_at_symbol()
@@ -52,12 +51,6 @@ class SITE:
         self.check_form_handler(soup)
 
     # analyze url
-    def check_internet_protocol(self):
-        if self.url[0:5].upper() == "HTTPS":
-            self.features[util.HTTPS_PROTOCOL] = 1
-        else:
-            self.features[util.HTTPS_PROTOCOL] = -1
-
     def check_url_length(self):
         if len(self.url) >= 54:
             self.features[util.LONG_URL] = -1
