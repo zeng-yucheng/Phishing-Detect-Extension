@@ -1,3 +1,9 @@
+"""
+This part is completed by Zeng Yucheng
+Main framework of backend
+"""
+
+
 import urllib.request
 import sys
 from feature import SITE
@@ -18,7 +24,7 @@ if len(url) > 4:
 response = urllib.request.urlopen(url)
 string = response.read()
 codec = 'utf-8'
-dir = 'D:/NUS/S2/CS5331/Proj/proj/Phishing-Detect-Extension/data/dataset.txt'
+# dir = 'D:/NUS/S2/CS5331/Proj/proj/Phishing-Detect-Extension/data/dataset.txt'
 
 try:
     print("Using UTF-8 to decode...")
@@ -31,20 +37,16 @@ except:
 
 print("Transfer Successfully!")
 
-# For testing only
-url = 'https://www.google.com'
 fb = sys.argv[2]
 
 if fb == '0':
     # Construct site class
     site = SITE(url, html)
-    # features = site.analyze()
-    features = [1 for i in range(11)]
-    print(features)
+    features = site.analyze()
     # Process features
     res = xgb(features)
     print(res)
 else:
     with open(dir, "w") as f:
         f.write(url+' '+fb)
-    print(url, fb)
+    # print(url, fb)

@@ -1,3 +1,9 @@
+"""
+This part is completed by Zeng Yucheng and Xu Ye
+Fully-connected neural network training and testing, til line 60 (Zeng Yucheng)
+(Xu Ye)
+"""
+
 import numpy as np
 from scipy.io import arff
 import pandas as pd
@@ -49,8 +55,9 @@ plt.ylabel('Acc')
 plt.legend()
 plt.show()
 
-# y_pred = model.predict(X_test)
+# save and load model, first time only
+# model.save('../models/fnn.m5')
+# test_model = load_model('../models/fnn.m5')
 
-model.save('../models/fnn.m5')
-test_model = load_model('../models/fnn.m5')
-print(test_model.predict(X_test))
+# ---------further analyze the ROC curve, AUC value and feature importance----------- #
+

@@ -12,6 +12,8 @@ function func(){
 		var j = JSON.parse(rsp);
 		$("#tres").text(j.result);
 		$("#tprob").text(j.probability);
+		$("#tfirst").text(j.first);
+		$("#tsecond").text(j.second);
 		return req.responseText;
 	});
 }

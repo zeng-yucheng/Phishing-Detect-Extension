@@ -24,7 +24,7 @@ body{
   vertical-align: middle; 
   text-align:center;
   position: absolute;
-  top: 300px;
+  top: 350px;
   left: -15px;
 }
 
@@ -37,7 +37,7 @@ body{
   vertical-align: middle; 
   text-align:center;
   position: absolute;
-  top: 300px;
+  top: 350px;
   left: 95px;
 }
 
@@ -51,7 +51,7 @@ div {
 
 table {
 	table-layout: fixed;
-	width: 85%;
+	width: 92%;
 	height: 15px;
 	text-align: left;
 	margin: auto;

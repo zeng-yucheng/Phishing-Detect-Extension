@@ -1,3 +1,9 @@
+"""
+This part is completed by Zeng Yucheng and Xu Ye
+XGBoost model training and testing, til line 38 (Zeng Yucheng)
+(Xu Ye)
+"""
+
 import numpy as np
 from scipy.io import arff
 import pandas as pd
@@ -10,12 +16,10 @@ import matplotlib.pyplot as plt
 data = arff.loadarff('../datasets/Training Dataset.arff')
 df = pd.DataFrame(data[0]).astype('int')
 
-# ---------need to use corresponding features------------- #
 keys = ['URL_Length', 'Shortining_Service', 'having_At_Symbol', 'double_slash_redirecting', 'Prefix_Suffix',
          'Domain_registeration_length', 'Abnormal_URL', 'age_of_domain', 'URL_of_Anchor', 'SFH',
          'Submitting_to_email', 'Result']
 df = df[keys]
-print(df)
 
 X, y = df.values[:, :-1], df.values[:, -1]
 
@@ -27,11 +31,10 @@ xgb.fit(X_train, y_train)
 res = xgb.score(X_test, y_test)
 print(res)
 
-pickle.dump(xgb, open('../models/xgb.pickle.dat', 'wb'))
-test_xgb = pickle.load(open('../models/xgb.pickle.dat', 'rb'))
-importance = pd.DataFrame(columns=keys[:-1], data=[test_xgb.feature_importances_])
-print(importance)
-# print(test_xgb.predict_proba(X_test))
+# save and load model, first time only
+# pickle.dump(xgb, open('../models/xgb.pickle.dat', 'wb'))
+# test_xgb = pickle.load(open('../models/xgb.pickle.dat', 'rb'))
+importance = dict(zip(keys[:-1], xgb.feature_importances_))
 
 # ---------further analyze the ROC curve, AUC value and feature importance----------- #
 
