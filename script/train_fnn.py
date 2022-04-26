@@ -21,13 +21,14 @@ X = df.values[:, :-1]
 df['one_hot_1'] = df['Result'].apply(lambda x: 1 if x == -1 else 0)
 df['one_hot_2'] = df['one_hot_1'].apply((lambda x: 1 - x))
 y = df.values[:, -2:]
+
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=5331)
 
 model = models.Sequential()
 model.add(layers.Dense(16, activation='relu', input_shape=(X_train.shape[1],)))
 model.add(layers.Dense(16, activation='relu'))
-model.add(layers.Dense(2, activation='sigmoid'))
-model.compile(optimizer='rmsprop', loss='binary_crossentropy', metrics=['accuracy'])
+model.add(layers.Dense(2, activation='softmax'))
+model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
 history = model.fit(X_train, y_train, epochs=25, batch_size=512, validation_split=0.2)
 history_dict = history.history
@@ -58,6 +59,7 @@ plt.show()
 # save and load model, first time only
 model.save('../models/fnn.m5')
 test_model = load_model('../models/fnn.m5')
+print(test_model.evaluate(X_test, y_test))
 
 
 # ---------further analyze the ROC curve, AUC value and feature importance----------- #
