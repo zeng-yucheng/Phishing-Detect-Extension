@@ -57,9 +57,9 @@ plt.legend()
 plt.show()
 
 # save and load model, first time only
-model.save('../models/fnn.m5')
-test_model = load_model('../models/fnn.m5')
-print(test_model.evaluate(X_test, y_test))
+# model.save('../models/fnn.m5')
+# test_model = load_model('../models/fnn.m5')
+# print(test_model.evaluate(X_test, y_test))
 
 
 # ---------further analyze the ROC curve, AUC value and feature importance----------- #
