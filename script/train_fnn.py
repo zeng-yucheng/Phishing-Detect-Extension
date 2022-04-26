@@ -19,7 +19,7 @@ df = df[['URL_Length', 'Shortining_Service', 'having_At_Symbol', 'double_slash_r
          'Submitting_to_email', 'Result']]
 X = df.values[:, :-1]
 df['one_hot_1'] = df['Result'].apply(lambda x: 1 if x == -1 else 0)
-df['one_hot_2'] = df['one_hot_1'].apply((lambda x: 1 - 1))
+df['one_hot_2'] = df['one_hot_1'].apply((lambda x: 1 - x))
 y = df.values[:, -2:]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=5331)
 
@@ -29,7 +29,7 @@ model.add(layers.Dense(16, activation='relu'))
 model.add(layers.Dense(2, activation='sigmoid'))
 model.compile(optimizer='rmsprop', loss='binary_crossentropy', metrics=['accuracy'])
 
-history = model.fit(X_train, y_train, epochs=20, batch_size=512, validation_split=0.2)
+history = model.fit(X_train, y_train, epochs=25, batch_size=512, validation_split=0.2)
 history_dict = history.history
 print(history_dict.keys())
 
@@ -56,8 +56,9 @@ plt.legend()
 plt.show()
 
 # save and load model, first time only
-# model.save('../models/fnn.m5')
-# test_model = load_model('../models/fnn.m5')
+model.save('../models/fnn.m5')
+test_model = load_model('../models/fnn.m5')
+
 
 # ---------further analyze the ROC curve, AUC value and feature importance----------- #
 
