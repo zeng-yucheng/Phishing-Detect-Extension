@@ -24,7 +24,7 @@ if len(url) > 4:
 response = urllib.request.urlopen(url)
 string = response.read()
 codec = 'utf-8'
-# dir = 'D:/NUS/S2/CS5331/Proj/proj/Phishing-Detect-Extension/data/dataset.txt'
+dir = '../data/dataset.txt'
 
 try:
     print("Using UTF-8 to decode...")
@@ -48,5 +48,6 @@ if fb == '0':
     print(res)
 else:
     with open(dir, "w") as f:
+        # Simulate database
         f.write(url+' '+fb)
     # print(url, fb)
