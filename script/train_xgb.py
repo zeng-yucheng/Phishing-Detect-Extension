@@ -1,7 +1,6 @@
 """
-This part is completed by Zeng Yucheng and Xu Ye
-XGBoost model training and testing, til line 38 (Zeng Yucheng)
-(Xu Ye)
+This part is completed by Zeng Yucheng
+XGBoost model training and testing
 """
 
 import numpy as np

@@ -1,7 +1,6 @@
 """
-This part is completed by Zeng Yucheng and Xu Ye
-Fully-connected neural network training and testing, til line 60 (Zeng Yucheng)
-(Xu Ye)
+This part is completed by Zeng Yucheng
+Fully-connected neural network training and testing
 """
 
 import numpy as np
